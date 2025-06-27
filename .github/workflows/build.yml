@@ -12,12 +12,14 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  push:
 
 permissions:
   contents: write
 
 jobs:
   build-linux-x86_64:
+    if: false
     env:
       ARCH: x86_64
       OS: linux
@@ -94,6 +96,7 @@ jobs:
           tag: nightly
 
   build-macos-aarch64:
+    if: false
     env:
       ARCH: aarch64
       OS: macos
@@ -132,6 +135,7 @@ jobs:
           tag: nightly
 
   build-macos-x86_64:
+    if: false
     env:
       ARCH: x86_64
       OS: macos
