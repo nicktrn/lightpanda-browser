@@ -7,8 +7,8 @@ env:
   AWS_REGION: ${{ vars.NIGHTLY_BUILD_AWS_REGION }}
 
 on:
-  schedule:
-    - cron: "2 2 * * *"
+  # schedule:
+  #   - cron: "2 2 * * *"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -84,6 +84,7 @@ jobs:
         run: mv zig-out/bin/lightpanda lightpanda-${{ env.ARCH }}-${{ env.OS }}
 
       - name: upload on s3
+        if: false
         run: |
           export DIR=`git show --no-patch --no-notes --pretty='%cs_%h'`
           aws s3 cp --storage-class=GLACIER_IR lightpanda-${{ env.ARCH }}-${{ env.OS }} s3://lpd-nightly-build/${DIR}/lightpanda-${{ env.ARCH }}-${{ env.OS }}
