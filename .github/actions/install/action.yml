@@ -3,29 +3,37 @@ description: "Install deps for the project browsercore"
 
 inputs:
   zig:
-    description: 'Zig version to install'
+    description: "Zig version to install"
     required: false
-    default: '0.14.1'
+    default: "0.14.1"
   arch:
-    description: 'CPU arch used to select the v8 lib'
+    description: "CPU arch used to select the v8 lib"
     required: false
-    default: 'x86_64'
+    default: "x86_64"
   os:
-    description: 'OS used to select the v8 lib'
+    description: "OS used to select the v8 lib"
     required: false
-    default: 'linux'
+    default: "linux"
   zig-v8:
-    description: 'zig v8 version to install'
+    description: "zig v8 version to install"
     required: false
-    default: 'v0.1.24'
+    default: "v0.1.25"
+  zig-v8-repo-owner:
+    description: "zig v8 repo owner"
+    required: false
+    default: "nicktrn"
+  zig-v8-repo-name:
+    description: "zig v8 repo name"
+    required: false
+    default: "zig-v8-fork"
   v8:
-    description: 'v8 version to install'
+    description: "v8 version to install"
     required: false
-    default: '13.6.233.8'
+    default: "13.6.233.8"
   cache-dir:
-    description: 'cache dir to use'
+    description: "cache dir to use"
     required: false
-    default: '~/.cache'
+    default: "~/.cache"
 
 runs:
   using: "composite"
@@ -56,7 +64,7 @@ runs:
       run: |
         mkdir -p ${{ inputs.cache-dir }}/v8
 
-        wget -O ${{ inputs.cache-dir }}/v8/libc_v8.a https://github.com/lightpanda-io/zig-v8-fork/releases/download/${{ inputs.zig-v8 }}/libc_v8_${{ inputs.v8 }}_${{ inputs.os }}_${{ inputs.arch }}.a
+        wget -O ${{ inputs.cache-dir }}/v8/libc_v8.a https://github.com/${{ inputs.zig-v8-repo-owner }}/${{ inputs.zig-v8-repo-name }}/releases/download/${{ inputs.zig-v8 }}/libc_v8_${{ inputs.v8 }}_${{ inputs.os }}_${{ inputs.arch }}.a
 
     - name: install v8
       shell: bash
